@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inscrição confirmada — V Semana da Psicologia 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <!-- ===================== HEADER ===================== -->
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="brand">
+        <span class="brand-mark">V</span>
+        <span class="brand-text">
+          <strong>Semana da Psicologia</strong>
+          <span>2026 · UNINASSAU</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ===================== CONFIRMAÇÃO ===================== -->
+  <div class="confirm-wrap">
+    <div class="confirm-card">
+      <div class="confirm-icon">✓</div>
+      <h1>Inscrição recebida!</h1>
+      <p id="confirm-lead">
+        Enviamos um e-mail de confirmação com os detalhes da sua inscrição na
+        V Semana da Psicologia 2026.
+      </p>
+
+      <div class="confirm-details" id="confirm-details">
+        <div class="row"><span>Nome</span><span id="d-nome">—</span></div>
+        <div class="row"><span>E-mail</span><span id="d-email">—</span></div>
+        <div class="row"><span>Protocolo</span><span id="d-protocolo">—</span></div>
+        <div class="row"><span>Valor</span><span data-preco>R$ 30,00</span></div>
+      </div>
+
+      <a href="index.html" class="btn btn-secondary btn-block">Voltar para a página inicial</a>
+    </div>
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 V Semana da Psicologia · UNINASSAU</span>
+        <span>Faculdade Nassau · 26–28 de agosto de 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Preenche os dados guardados na etapa de inscrição, se existirem.
+    document.addEventListener("DOMContentLoaded", () => {
+      try {
+        const dados = JSON.parse(sessionStorage.getItem("inscricao_dados") || "null");
+        const protocolo = sessionStorage.getItem("inscricao_protocolo");
+
+        if (dados) {
+          document.getElementById("d-nome").textContent = dados.nome;
+          document.getElementById("d-email").textContent = dados.email;
+        }
+        if (protocolo) {
+          document.getElementById("d-protocolo").textContent = protocolo;
+        }
+      } catch (e) {
+        console.warn("Não foi possível carregar os dados da inscrição.", e);
+      }
+    });
+  </script>
+</body>
+</html>
