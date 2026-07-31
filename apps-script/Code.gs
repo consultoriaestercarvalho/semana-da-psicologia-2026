@@ -30,7 +30,7 @@
  */
 
 // Cole aqui o ID da sua planilha (está na URL dela, entre /d/ e /edit).
-const SPREADSHEET_ID = "COLE_AQUI_O_ID_DA_PLANILHA";
+const SPREADSHEET_ID = "1U1zbV-WNRTy61KcXBI5wrXVb6OGa_X1PcdBaUHSaHbQ";
 
 // Nome da aba dentro da planilha onde as inscrições serão gravadas.
 // Se a aba não existir, o script cria automaticamente na primeira execução.
@@ -139,4 +139,29 @@ function respostaJson(objeto) {
   return ContentService.createTextOutput(JSON.stringify(objeto)).setMimeType(
     ContentService.MimeType.JSON
   );
+}
+
+/**
+ * FUNÇÃO DE TESTE — não é usada pelo site.
+ * Rode esta função direto no editor (selecione "testarDoPost" no menu
+ * ao lado do botão "Executar" e clique em Executar) para simular um
+ * envio do formulário e ver o erro completo aqui no editor, com stack
+ * trace, em vez de só "Failed" no log de execuções.
+ */
+function testarDoPost() {
+  const eFalso = {
+    postData: {
+      contents: JSON.stringify({
+        nome: "Teste da Silva",
+        email: "teste@example.com",
+        telefone: "11999999999",
+        curso: "Psicologia",
+        periodo: "4º período",
+        cpf: "12345678909",
+      }),
+    },
+  };
+
+  const resultado = doPost(eFalso);
+  Logger.log(resultado.getContent());
 }
