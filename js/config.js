@@ -44,7 +44,7 @@ const CONFIG = {
   //    - Quem pode acessar: Qualquer pessoa
   // 5. Copie a URL gerada (termina em /exec) e cole abaixo.
   googleSheets: {
-    scriptUrl: "https://script.google.com/macros/s/AKfycbxBhFQzZMuXv7A4eVbGqHNVWZVxdE7gR8wHCorLQ74S9RFnabOCiKJxhBCqQ9h_6haD5w/exec",
+    scriptUrl: "https://script.google.com/macros/s/AKfycbwki_TRqlovIcJPq16gEQUVix2Gi6lM-eYMqIed-asCbAZjjrf5mKUqVuy286LCw4ne3g/exec",
   },
 
   // ------------------------------------------------------------
