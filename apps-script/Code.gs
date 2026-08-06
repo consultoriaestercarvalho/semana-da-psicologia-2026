@@ -50,14 +50,56 @@ const EVENTO = {
  */
 function doPost(e) {
   try {
-    const dados = JSON.parse(e.postData.contents);
+    const dados = extrairDados(e);
 
     salvarNaPlanilha(dados);
     enviarEmailConfirmacao(dados);
 
     return respostaJson({ ok: true });
   } catch (erro) {
+    registrarErro(erro, e);
     return respostaJson({ ok: false, erro: String(erro) });
+  }
+}
+
+/**
+ * Extrai os dados do pedido, aceitando tanto formulário
+ * (application/x-www-form-urlencoded, em e.parameter) quanto
+ * JSON (em e.postData.contents), para máxima compatibilidade.
+ */
+function extrairDados(e) {
+  if (e && e.parameter && Object.keys(e.parameter).length > 0) {
+    return e.parameter;
+  }
+  if (e && e.postData && e.postData.contents) {
+    return JSON.parse(e.postData.contents);
+  }
+  throw new Error("Nenhum dado recebido no pedido (nem parameter, nem postData).");
+}
+
+/**
+ * Grava o erro em uma aba "Logs" da planilha, para diagnóstico.
+ * Isso existe só para facilitar a depuração — pode remover depois
+ * que tudo estiver funcionando.
+ */
+function registrarErro(erro, e) {
+  try {
+    const planilha = SpreadsheetApp.openById(SPREADSHEET_ID);
+    let aba = planilha.getSheetByName("Logs");
+    if (!aba) {
+      aba = planilha.insertSheet("Logs");
+      aba.appendRow(["Data/Hora", "Erro", "Dados recebidos"]);
+    }
+    aba.appendRow([
+      new Date(),
+      String(erro) + " | stack: " + (erro && erro.stack ? erro.stack : ""),
+      JSON.stringify({
+        parameter: e ? e.parameter : null,
+        postData: e && e.postData ? e.postData.contents : null,
+      }),
+    ]);
+  } catch (erroDoLog) {
+    // Se nem isso funcionar, não tem muito mais o que fazer aqui.
   }
 }
 

@@ -152,13 +152,16 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // O Apps Script implantado como Web App normalmente exige
-    // modo no-cors quando chamado via fetch de outro domínio.
+    // Envia como application/x-www-form-urlencoded, que o Apps Script
+    // recebe de forma confiável mesmo em modo no-cors (diferente de JSON,
+    // que às vezes chega sem "postData" preenchido).
+    const corpo = new URLSearchParams(dados).toString();
+
     await fetch(url, {
       method: "POST",
       mode: "no-cors",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(dados),
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: corpo,
     });
   }
 
