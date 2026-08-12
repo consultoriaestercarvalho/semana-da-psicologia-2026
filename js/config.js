@@ -30,7 +30,7 @@ const CONFIG = {
   // Enquanto não tiver o link, o botão de pagamento fica desabilitado
   // e mostra um aviso "Pagamento em breve".
   infinityPay: {
-    checkoutUrl: "https://link.infinitepay.io/consultoriaestercarvalho/VC1DLTEtUg-lEUN4Nx54y-30,00",
+    checkoutUrl: "https://invoice.infinitepay.io/ester-rodrigues-zop/9xhy9hNXTw",
   },
 
   // ------------------------------------------------------------
