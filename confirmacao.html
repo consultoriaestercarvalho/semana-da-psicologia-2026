@@ -30,16 +30,23 @@
   <div class="confirm-wrap">
     <div class="confirm-card">
       <div class="confirm-icon">✓</div>
-      <h1>Inscrição recebida!</h1>
+      <h1 id="confirm-titulo">Inscrição recebida!</h1>
       <p id="confirm-lead">
         Enviamos um e-mail de confirmação com os detalhes da sua inscrição na
         V Semana da Psicologia 2026.
+      </p>
+      <p id="confirm-lead-pagamento" style="display:none;">
+        Seu pagamento via Pix foi marcado como <strong>informado por você</strong>.
+        A organização confere os pagamentos no extrato bancário antes de
+        liberar a lista de presença — se houver qualquer divergência, você
+        será contatado pelo e-mail ou telefone informados na inscrição.
       </p>
 
       <div class="confirm-details" id="confirm-details">
         <div class="row"><span>Nome</span><span id="d-nome">—</span></div>
         <div class="row"><span>E-mail</span><span id="d-email">—</span></div>
         <div class="row"><span>Protocolo</span><span id="d-protocolo">—</span></div>
+        <div class="row"><span>Status pagamento</span><span id="d-status-pagamento">—</span></div>
         <div class="row"><span>Valor</span><span data-preco>R$ 30,00</span></div>
       </div>
 
@@ -65,6 +72,7 @@
       try {
         const dados = JSON.parse(sessionStorage.getItem("inscricao_dados") || "null");
         const protocolo = sessionStorage.getItem("inscricao_protocolo");
+        const pagamentoConfirmado = sessionStorage.getItem("pagamento_confirmado") === "1";
 
         if (dados) {
           document.getElementById("d-nome").textContent = dados.nome;
@@ -72,6 +80,15 @@
         }
         if (protocolo) {
           document.getElementById("d-protocolo").textContent = protocolo;
+        }
+
+        const statusEl = document.getElementById("d-status-pagamento");
+        if (pagamentoConfirmado) {
+          statusEl.textContent = "Informado como pago (aguardando conferência)";
+          document.getElementById("confirm-lead-pagamento").style.display = "block";
+        } else {
+          statusEl.textContent = "Aguardando pagamento";
+          document.getElementById("confirm-titulo").textContent = "Inscrição registrada!";
         }
       } catch (e) {
         console.warn("Não foi possível carregar os dados da inscrição.", e);
