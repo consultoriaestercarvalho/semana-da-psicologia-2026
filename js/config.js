@@ -31,7 +31,7 @@ const CONFIG = {
   pix: {
     chave: "87981745632",
     tipoChave: "Telefone",
-    nomeRecebedor: "Ester Rodrigues Diniz Carvalho",
+    nomeRecebedor: "Maria Amanda dos Santos Rocha",
     cidade: "Serra Talhada",
   },
 
