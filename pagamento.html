@@ -11,7 +11,6 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="css/style.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 <body>
   <!-- ===================== HEADER ===================== -->
@@ -33,20 +32,23 @@
       <h1 style="margin-bottom: 4px;">Pague com Pix</h1>
       <p id="pagamento-lead">
         Sua inscrição foi registrada como <strong>aguardando pagamento</strong>.
-        Escaneie o QR Code abaixo ou use o código copia-e-cola para pagar
-        <span data-preco>R$ 30,00</span>.
+        Pague usando a chave Pix abaixo, no valor de <span data-preco>R$ 30,00</span>.
       </p>
 
-      <div id="pix-qrcode" style="display:flex; justify-content:center; margin: 20px 0;"></div>
-
-      <div class="field" style="margin-bottom: 16px;">
-        <label for="pix-codigo">Pix copia-e-cola</label>
-        <textarea id="pix-codigo" readonly rows="4" style="width:100%; resize:none; font-size:12px; padding:10px; border-radius:8px;"></textarea>
+      <div class="field" style="margin: 20px 0 16px;">
+        <label for="pix-chave">Chave Pix (<span id="p-tipo-chave">—</span>)</label>
+        <input type="text" id="pix-chave" readonly style="width:100%; font-size:16px; padding:10px; border-radius:8px; text-align:center; font-weight:600;" />
       </div>
 
       <button type="button" class="btn btn-outline btn-block" id="btn-copiar">
-        Copiar código Pix
+        Copiar chave Pix
       </button>
+
+      <p class="form-note" style="margin: 16px 0 0;">
+        Ao pagar pela chave, digite manualmente o valor de
+        <span data-preco>R$ 30,00</span> no app do seu banco — essa chave
+        não tem o valor embutido.
+      </p>
 
       <div class="confirm-details" style="margin-top:20px;">
         <div class="row"><span>Recebedor</span><span id="p-recebedor">—</span></div>
